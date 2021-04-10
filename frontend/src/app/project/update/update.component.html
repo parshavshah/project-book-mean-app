@@ -1,0 +1,26 @@
+<div class="col-6 offset-3">
+    <div class="card border-default mb-3">
+        <div class="card-header">Update Project #{{project._id}}</div>
+        <div class="card-body">
+            <form action="#" [formGroup]="projectForm" (ngSubmit)="update(projectForm)" novalidate>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" formControlName="title">
+                    <div *ngIf="projectForm.controls['title'].invalid && (projectForm.controls['title'].dirty || projectForm.controls['title'].touched)"
+                        class="error">
+                        <div *ngIf="projectForm.hasError('required', 'title')">Please enter first name</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="body">Details:</label>
+                    <textarea formControlName="body" class="form-control" cols="30" rows="10"></textarea>
+                    <div *ngIf="projectForm.controls['body'].invalid && (projectForm.controls['body'].dirty || projectForm.controls['body'].touched)"
+                        class="error">
+                        <div *ngIf="projectForm.hasError('required', 'body')">Please enter last name</div>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="projectForm.pristine" class="btn btn-dark">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

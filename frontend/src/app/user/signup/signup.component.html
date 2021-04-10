@@ -1,0 +1,56 @@
+<div class="row">
+
+    <div class="col-8">
+        <h2>Welcome to Project Book</h2>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo aliquet tortor, ac euismod metus
+            rhoncus at. Mauris a urna metus. Pellentesque dignissim tortor tincidunt nisl tempus, in interdum ex
+            volutpat. Vestibulum ac nisl vehicula, viverra mauris sit amet, venenatis neque. Vestibulum rutrum ligula
+            nunc, in convallis lectus maximus ac. Quisque aliquet tortor in ante ultrices, a venenatis mi ultricies.
+            Nunc eu ligula in mauris consectetur sodales</p>
+        <a class="btn btn-dark" routerLink="/login">Login</a>
+    </div>
+    <div class="col-4 ">
+        <div class="card border-default mb-3">
+            <div class="card-header">Register</div>
+            <div class="card-body">
+                <form action="#" [formGroup]="registerForm" (ngSubmit)="register(registerForm)" novalidate>
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" class="form-control" formControlName="firstName">
+                        <div *ngIf="registerForm.controls['firstName'].invalid && (registerForm.controls['firstName'].dirty || registerForm.controls['firstName'].touched)"
+                            class="error">
+                            <div *ngIf="registerForm.hasError('required', 'firstName')">Please enter first name</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" class="form-control" formControlName="lastName">
+                        <div *ngIf="registerForm.controls['lastName'].invalid && (registerForm.controls['lastName'].dirty || registerForm.controls['lastName'].touched)"
+                            class="error">
+                            <div *ngIf="registerForm.hasError('required', 'lastName')">Please enter last name</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" formControlName="email">
+                        <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)"
+                            class="error">
+                            <div *ngIf="registerForm.hasError('required', 'email')">Please enter email</div>
+                            <div *ngIf="registerForm.hasError('email', 'email')">Please enter valid email</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" formControlName="password">
+                        <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)"
+                            class="error">
+                            <div *ngIf="registerForm.hasError('required', 'password')">Please enter password</div>
+                        </div>
+                    </div>
+                    <button type="submit" [disabled]="registerForm.pristine" class="btn btn-dark">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

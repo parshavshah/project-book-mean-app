@@ -1,0 +1,40 @@
+<div class="row">
+
+    <div class="col-8">
+        <h2>Welcome to Project Book</h2>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo aliquet tortor, ac euismod metus
+            rhoncus at. Mauris a urna metus. Pellentesque dignissim tortor tincidunt nisl tempus, in interdum ex
+            volutpat. Vestibulum ac nisl vehicula, viverra mauris sit amet, venenatis neque. Vestibulum rutrum ligula
+            nunc, in convallis lectus maximus ac. Quisque aliquet tortor in ante ultrices, a venenatis mi ultricies.
+            Nunc eu ligula in mauris consectetur sodales</p>
+        <a class="btn btn-dark" routerLink="/login">Login</a>
+    </div>
+    <div class="col-4 ">
+        <div class="card border-default mb-3">
+            <div class="card-header">Verify</div>
+            <div class="card-body">
+                <form action="#" [formGroup]="verifyForm" (ngSubmit)="verify(verifyForm)" novalidate>
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" formControlName="email">
+                        <div *ngIf="verifyForm.controls['email'].invalid && (verifyForm.controls['email'].dirty || verifyForm.controls['email'].touched)"
+                            class="error">
+                            <div *ngIf="verifyForm.hasError('required', 'email')">Please enter email</div>
+                            <div *ngIf="verifyForm.hasError('email', 'email')">Please enter valid email</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Code:</label>
+                        <input type="code" class="form-control" formControlName="code">
+                        <div *ngIf="verifyForm.controls['code'].invalid && (verifyForm.controls['code'].dirty || verifyForm.controls['code'].touched)"
+                            class="error">
+                            <div *ngIf="verifyForm.hasError('required', 'code')">Please enter verification code</div>
+                        </div>
+                    </div>
+                    <button type="submit" [disabled]="verifyForm.pristine" class="btn btn-dark">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

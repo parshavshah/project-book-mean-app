@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-4" *ngFor="let project of projectList">
+        <div class="card border-default mb-3">
+            <div class="card-header">{{project.title}}</div>
+            <div class="card-body">
+                <p class="card-text">{{project.body}}</p>
+                <h6 class="card-subtitle mb-2 text-muted">{{project.author.firstName}} {{project.author.lastName}} </h6>
+                <a (click)="editProject(project)">edit</a>
+            </div>
+        </div>
+    </div>
+</div>
