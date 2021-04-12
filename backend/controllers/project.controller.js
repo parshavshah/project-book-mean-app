@@ -263,3 +263,31 @@ exports.removeLike = async (req, res) => {
         response.response(res);
     }
 }
+
+exports.getProjectById = async (req, res) => {
+    try {
+
+        const projectId = req.params.id
+
+        const dbResponse = await projectModel
+            .find({ hidden: false, _id: ObjectId(projectId) })
+            .select('-hidden -__v')
+            .sort({ date: 1 })
+            .populate('author', 'firstName lastName')
+            .populate('comments.userId', 'firstName lastName')
+            .exec().then((response) => {
+                return JSON.parse(JSON.stringify(response))
+            })
+
+        res['data'] = dbResponse;
+        res['message'] = "Project created";
+        res['code'] = 200
+
+        response.response(res);
+    } catch (error) {
+        res.message = error.message;
+        res.code = 500;
+        res.data = error;
+        response.response(res);
+    }
+}
