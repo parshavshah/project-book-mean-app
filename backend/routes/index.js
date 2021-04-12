@@ -55,4 +55,8 @@ router.delete('/project/like',
   authUser,
   controllers.projectController.removeLike)
 
+router.get('/project/:id',
+  authUser,
+  controllers.projectController.getProjectById)
+
 module.exports = router;
