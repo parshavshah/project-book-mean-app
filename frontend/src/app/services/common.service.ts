@@ -39,6 +39,10 @@ export class CommonService {
     if (!this.token) {
       this.token = localStorage.getItem("authToken");
     }
-    return new HttpHeaders().set("authorization", this.token);
+    if (this.token) {
+      return new HttpHeaders().set("authorization", this.token);
+    } else {
+      return
+    }
   }
 }

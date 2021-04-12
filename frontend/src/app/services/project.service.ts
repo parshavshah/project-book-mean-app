@@ -13,12 +13,20 @@ export class ProjectService {
     return this.chttp.get('project')
   }
 
+  getProjectById(id) {
+    return this.chttp.get(`project/${id}`)
+  }
+
   createProject(data) {
     return this.chttp.post('project', data)
   }
 
   updateProject(data) {
     return this.chttp.patch('project', data)
+  }
+
+  addLike(projectId) {
+    return this.chttp.post('project/like', { projectId: projectId })
   }
 
 }

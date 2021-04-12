@@ -4,8 +4,10 @@
             <div class="card-header">{{project.title}}</div>
             <div class="card-body">
                 <p class="card-text">{{project.body}}</p>
-                <h6 class="card-subtitle mb-2 text-muted">{{project.author.firstName}} {{project.author.lastName}} </h6>
-                <a (click)="editProject(project)">edit</a>
+                <h6 class="card-subtitle mb-2 text-muted">{{project.author.firstName}}
+                    {{project.author.lastName}} </h6>
+                <a (click)="editProject(project)">edit</a> |
+                <a (click)="readProject(project)">read</a>
             </div>
         </div>
     </div>

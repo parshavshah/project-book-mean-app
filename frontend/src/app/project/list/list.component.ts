@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProjectService } from 'src/app/services/project.service';
+import { Title } from "@angular/platform-browser";
+
 
 @Component({
   selector: 'app-list',
@@ -12,8 +14,8 @@ export class ListComponent implements OnInit {
 
   public projectList = [];
 
-  constructor(private projectService: ProjectService, private route: Router) {
-
+  constructor(private projectService: ProjectService, private route: Router, private titleService: Title) {
+    this.titleService.setTitle("Project List")
   }
 
   ngOnInit(): void {
@@ -34,6 +36,10 @@ export class ListComponent implements OnInit {
 
   editProject(project) {
     this.route.navigate(['/project/update/', project._id], { state: { project: project } })
+  }
+
+  readProject(project) {
+    this.route.navigate(['/project/read/', project._id])
   }
 
 }

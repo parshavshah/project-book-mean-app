@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-login',
@@ -33,14 +34,18 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: FormGroup) {
+    console.log(form, '-form-')
     if (form.valid) {
       this.userService.loginUser({
         password: form.value.password,
         username: form.value.email,
       }).subscribe((data: any) => {
+        localStorage.removeItem('authToken')
         localStorage.setItem('authToken', data.data);
         if (data.status == 200) {
-          this.route.navigate(['/projects'])
+          setTimeout(() => {
+            this.route.navigate(['/projects'])
+          }, 1000)
         }
       })
     }

@@ -36,6 +36,10 @@ const routes: Routes = [
   {
     path: 'project/update/:id',
     component: UpdateComponent
+  },
+  {
+    path: 'project/read/:id',
+    component: ReadComponent
   }
 ];
 

@@ -5,3 +5,9 @@ body{
     color:red;
     font-size: 14px;
 }
+.comment .card-header{
+    padding: 4px 18px;
+}
+.comment .card-body{
+    padding: 4px 18px;
+}
