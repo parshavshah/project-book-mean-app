@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
+import { ManageCommentComponent } from '../manage-comment/manage-comment.component';
 
 @Component({
   selector: 'app-read',
@@ -9,12 +10,13 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class ReadComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private projectService: ProjectService) {
-
-  }
-
   projectId
   project
+  @ViewChild(ManageCommentComponent)
+  private manageComment: ManageCommentComponent
+  commentEdit = false
+
+  constructor(private route: ActivatedRoute, private projectService: ProjectService) { }
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.paramMap.get('id');
@@ -38,7 +40,17 @@ export class ReadComponent implements OnInit {
   addComment(data) {
     if (data == "true") {
       this.loadProject();
+      this.commentEdit = false
+      let el = document.getElementById("project");
+      el.scrollIntoView({ behavior: 'smooth' });
     }
+  }
+
+  editComment(comment) {
+    this.commentEdit = true
+    let el = document.getElementById("commentEl");
+    el.scrollIntoView({ behavior: 'smooth' });
+    this.manageComment.initupdateCommentForm(comment._id, comment.body)
   }
 
 }

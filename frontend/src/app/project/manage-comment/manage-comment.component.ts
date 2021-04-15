@@ -13,12 +13,22 @@ export class ManageCommentComponent implements OnInit {
 
   @Output() commentAddedEvent = new EventEmitter<string>();
   @Input() projectId: string;
+  @Input() commentId: string;
   commentForm
+  isEdit = false
 
   constructor(private projectService: ProjectService, private route: Router) { }
 
   ngOnInit(): void {
     this.initProjectCommentForm()
+  }
+
+  initupdateCommentForm(commentId, comment) {
+    this.isEdit = true
+    this.commentForm = new FormGroup({
+      commentId: new FormControl(commentId, Validators.required),
+      comment: new FormControl(comment, Validators.required)
+    });
   }
 
   initProjectCommentForm() {
@@ -27,19 +37,31 @@ export class ManageCommentComponent implements OnInit {
     });
   }
 
-  addComment(form: FormGroup) {
+  manageComment(form: FormGroup) {
     if (form.valid) {
-      let commentData = {
-        comment: form.value.comment,
-        projectId: this.projectId
-      }
-      this.projectService.addComment(commentData).subscribe((data: any) => {
-        if (data.status == 200) {
-          this.commentAddedEvent.emit("true")
-
+      if (this.isEdit == true) {
+        let commentData = {
+          comment: form.value.comment,
+          projectId: this.projectId,
+          commentId: form.value.commentId
         }
+        this.projectService.editComment(commentData).subscribe((data: any) => {
+          if (data.status == 200) {
+            this.commentAddedEvent.emit("true")
+          }
+        })
+      } else {
+        let commentData = {
+          comment: form.value.comment,
+          projectId: this.projectId
+        }
+        this.projectService.addComment(commentData).subscribe((data: any) => {
+          if (data.status == 200) {
+            this.commentAddedEvent.emit("true")
 
-      })
+          }
+        })
+      }
       this.commentForm.reset()
     }
   }

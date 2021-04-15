@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProjectService } from 'src/app/services/project.service';
-import { Title } from "@angular/platform-browser";
-
 
 @Component({
   selector: 'app-list',
@@ -14,8 +12,8 @@ export class ListComponent implements OnInit {
 
   public projectList = [];
 
-  constructor(private projectService: ProjectService, private route: Router, private titleService: Title) {
-    this.titleService.setTitle("Project List")
+  constructor(private projectService: ProjectService, private route: Router) {
+
   }
 
   ngOnInit(): void {

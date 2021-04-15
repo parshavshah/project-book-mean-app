@@ -33,4 +33,8 @@ export class ProjectService {
     return this.chttp.post('project/comment', data)
   }
 
+  editComment(data) {
+    return this.chttp.patch('project/comment', data)
+  }
+
 }

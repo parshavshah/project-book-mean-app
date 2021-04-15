@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" id="project">
     <div *ngIf="project" class="col-6 offset-3">
         <div class="card border-default mb-3">
             <div class="card-header">
@@ -19,11 +19,14 @@
             <div class="card-header">{{comment.userId.firstName}} {{comment.userId.lastName}} <small>{{comment.date|
                     dateAgo}}</small></div>
             <div class="card-body">
-                <p class="card-text">{{comment.body}} </p>
+                <p class="card-text">{{comment.body}}
+                    <small><a (click)="editComment(comment, commentElement)">edit</a></small>
+                </p>
             </div>
         </div>
-        <h3>Add Comment</h3>
-        <app-manage-comment (commentAddedEvent)="addComment($event)" [projectId]="project._id"></app-manage-comment>
+        <h3><span *ngIf="commentEdit">Edit</span><span *ngIf="!commentEdit">Add</span> Comment</h3>
+        <app-manage-comment id="commentEl" (commentAddedEvent)="addComment($event)" [projectId]="project._id">
+        </app-manage-comment>
     </div>
 
 
