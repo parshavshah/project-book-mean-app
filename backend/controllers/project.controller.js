@@ -10,7 +10,6 @@ const response = utils.response;
 const projectModel = require('../models').models.projectModel;
 const notificationModel = require('../models').models.notificationModel;
 
-
 exports.createProject = async (req, res) => {
     try {
 
@@ -222,6 +221,7 @@ exports.addLike = async (req, res) => {
         if (dbResponse.nModified == 1) {
             res['message'] = "Like added successfully";
         } else {
+            res['code'] = 501
             res['message'] = "Like already exists";
         }
 
@@ -233,7 +233,6 @@ exports.addLike = async (req, res) => {
         response.response(res);
     }
 }
-
 
 exports.removeLike = async (req, res) => {
     try {
