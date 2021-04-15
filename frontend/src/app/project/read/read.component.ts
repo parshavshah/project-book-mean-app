@@ -18,6 +18,10 @@ export class ReadComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.paramMap.get('id');
+    this.loadProject()
+  }
+
+  loadProject() {
     this.projectService.getProjectById(this.projectId).subscribe((data: any) => {
       this.project = data.data[0]
     })
@@ -25,10 +29,16 @@ export class ReadComponent implements OnInit {
 
   addProjectLike() {
     this.projectService.addLike(this.projectId).subscribe((data: any) => {
-      if (data) {
-        console.log("like added")
+      if (data.status === 200) {
+        this.loadProject()
       }
     })
+  }
+
+  addComment(data) {
+    if (data == "true") {
+      this.loadProject();
+    }
   }
 
 }

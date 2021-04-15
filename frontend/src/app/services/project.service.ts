@@ -29,4 +29,8 @@ export class ProjectService {
     return this.chttp.post('project/like', { projectId: projectId })
   }
 
+  addComment(data) {
+    return this.chttp.post('project/comment', data)
+  }
+
 }

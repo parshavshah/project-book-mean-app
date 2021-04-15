@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="col-6 offset-3">
+    <div *ngIf="project" class="col-6 offset-3">
         <div class="card border-default mb-3">
             <div class="card-header">
                 {{project.title}} <small>(by : {{project.author.firstName}}
                     {{project.author.lastName}})</small>
-                <span class="float-right">{{project.date | date: 'dd-MM-yyyy'}}</span>
+                <span class="float-right">{{project.date | dateAgo}}</span>
             </div>
             <div class="card-body">
                 <p class="card-text">{{project.body}}</p>
@@ -13,16 +13,19 @@
         </div>
     </div>
 
-    <div class="col-6 offset-3">
+    <div *ngIf="project" class="col-6 offset-3">
         <h3>Comments <span class="float-right text-dark">Likes : {{project.likes.length}}</span> </h3>
         <div class="card border-default mb-3 comment" *ngFor="let comment of project.comments">
             <div class="card-header">{{comment.userId.firstName}} {{comment.userId.lastName}} <small>{{comment.date|
-                    date: 'dd-MM-yyyy'}}</small></div>
+                    dateAgo}}</small></div>
             <div class="card-body">
                 <p class="card-text">{{comment.body}} </p>
             </div>
         </div>
+        <h3>Add Comment</h3>
+        <app-manage-comment (commentAddedEvent)="addComment($event)" [projectId]="project._id"></app-manage-comment>
     </div>
+
 
 
 </div>
