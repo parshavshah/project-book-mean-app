@@ -1,0 +1,12 @@
+<form action="#" [formGroup]="commentForm" (ngSubmit)="addComment(commentForm)" novalidate>
+    <div class="form-group">
+        <label for="comment">Comment:</label>
+        <input type="text" class="form-control" formControlName="comment">
+        <div *ngIf="commentForm.controls['comment'].invalid && (commentForm.controls['comment'].dirty || commentForm.controls['comment'].touched)"
+            class="error">
+            <div *ngIf="commentForm.hasError('required', 'comment')">Please enter comment</div>
+        </div>
+        <br>
+        <button type="submit" [disabled]="commentForm.pristine" class="btn btn-dark">Submit</button>
+    </div>
+</form>

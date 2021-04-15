@@ -13,6 +13,8 @@ import { ListComponent } from './project/list/list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonService } from './services/common.service';
+import { ManageCommentComponent } from './project/manage-comment/manage-comment.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CommonService } from './services/common.service';
     CreateComponent,
     UpdateComponent,
     ReadComponent,
-    ListComponent
+    ListComponent,
+    ManageCommentComponent,
+    DateAgoPipe,
   ],
   imports: [
     BrowserModule,
