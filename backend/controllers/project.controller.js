@@ -238,7 +238,7 @@ exports.removeLike = async (req, res) => {
     try {
 
         let dbResponse = await projectModel.updateOne({
-            _id: ObjectId(req.body.projectId)
+            _id: ObjectId(req.query.projectId)
         }, {
             $pull: {
                 'likes': ObjectId(req.user._id)
