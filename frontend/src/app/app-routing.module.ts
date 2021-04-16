@@ -4,6 +4,7 @@ import { CreateComponent } from './project/create/create.component';
 import { ListComponent } from './project/list/list.component';
 import { ReadComponent } from './project/read/read.component';
 import { UpdateComponent } from './project/update/update.component';
+import { AuthGuardService } from './services/auth-guard.service';
 import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { VerifyComponent } from './user/verify/verify.component';
@@ -23,23 +24,28 @@ const routes: Routes = [
   },
   {
     path: 'projects',
-    component: ListComponent
+    component: ListComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'project/:id',
-    component: ReadComponent
+    component: ReadComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'create-project',
-    component: CreateComponent
+    component: CreateComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'project/update/:id',
-    component: UpdateComponent
+    component: UpdateComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'project/read/:id',
-    component: ReadComponent
+    component: ReadComponent,
+    canActivate: [AuthGuardService]
   }
 ];
 
