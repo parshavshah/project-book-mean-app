@@ -15,6 +15,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonService } from './services/common.service';
 import { ManageCommentComponent } from './project/manage-comment/manage-comment.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+import { AuthGuardService } from './services/auth-guard.service';
+
+export function tokenGetter() {
+  return localStorage.getItem("authToken");
+}
+
+const JWT_Module_Options: JwtModuleOptions = {
+  config: {
+    tokenGetter: tokenGetter
+  }
+};
+
 
 @NgModule({
   declarations: [
@@ -33,9 +46,11 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot(JWT_Module_Options)
+
   ],
-  providers: [CommonService],
+  providers: [CommonService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

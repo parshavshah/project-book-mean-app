@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { ManageCommentComponent } from '../manage-comment/manage-comment.component';
 
@@ -16,7 +17,9 @@ export class ReadComponent implements OnInit {
   private manageComment: ManageCommentComponent
   commentEdit = false
 
-  constructor(private route: ActivatedRoute, private projectService: ProjectService) { }
+  constructor(private route: ActivatedRoute,
+    private projectService: ProjectService,
+    public authService: AuthService) { }
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.paramMap.get('id');
@@ -29,8 +32,23 @@ export class ReadComponent implements OnInit {
     })
   }
 
+  isLikedProject() {
+    if (this.project.likes.includes(this.authService.user._id)) {
+      return true
+    }
+    return false
+  }
+
   addProjectLike() {
     this.projectService.addLike(this.projectId).subscribe((data: any) => {
+      if (data.status === 200) {
+        this.loadProject()
+      }
+    })
+  }
+
+  removeProjectLike() {
+    this.projectService.removeLike(this.projectId).subscribe((data: any) => {
       if (data.status === 200) {
         this.loadProject()
       }
@@ -51,6 +69,10 @@ export class ReadComponent implements OnInit {
     let el = document.getElementById("commentEl");
     el.scrollIntoView({ behavior: 'smooth' });
     this.manageComment.initupdateCommentForm(comment._id, comment.body)
+  }
+
+  isSameUser(comment) {
+    return this.authService.user._id == comment.userId._id
   }
 
 }

@@ -27,8 +27,8 @@ export class CommonService {
     return this.http.put(`${this.baseUrl + apiRoute}`, body, { headers: this.getHttpHeaders() });
   }
 
-  delete(apiRoute: string) {
-    return this.http.delete(`${this.baseUrl + apiRoute}`, { headers: this.getHttpHeaders() });
+  delete(apiRoute: string, body: any) {
+    return this.http.delete(`${this.baseUrl + apiRoute}`, { headers: this.getHttpHeaders(), params: body });
   }
 
   patch(apiRoute: string, body: any) {

@@ -1,13 +1,16 @@
 <div class="row">
     <div class="col-4" *ngFor="let project of projectList">
         <div class="card border-default mb-3">
-            <div class="card-header">{{project.title}}</div>
+            <div class=" text-info card-header">{{project.title}}</div>
             <div class="card-body">
                 <p class="card-text">{{project.body}}</p>
-                <h6 class="card-subtitle mb-2 text-muted">{{project.author.firstName}}
-                    {{project.author.lastName}} </h6>
-                <a (click)="editProject(project)">edit</a> |
-                <a (click)="readProject(project)">read</a>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    <span *ngIf="!isSameUser(project)">{{project.author.firstName}} {{project.author.lastName}}</span>
+                    <span *ngIf="isSameUser(project)">You</span>
+                </h6>
+                <a (click)="editProject(project)"><i title="Edit Comment" class="text-danger bi bi-pencil"></i></a>
+                &nbsp;
+                <a (click)="readProject(project)"><i title="Edit Comment" class="text-info bi bi-eye"></i></a>
             </div>
         </div>
     </div>

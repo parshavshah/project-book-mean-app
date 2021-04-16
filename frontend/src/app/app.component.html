@@ -1,6 +1,6 @@
-<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-info">
   <div class="container">
-    <a href="../" class="navbar-brand">Project Book</a>
+    <a class="navbar-brand">Project Book</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,19 +8,23 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" (click)="setDocTitle('Projects')" routerLink="/projects"
+          <a class="nav-link" *ngIf="authService.isLoggedIn" (click)="setDocTitle('Projects')" routerLink="/projects"
             routerLinkActive="active">Projects</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="setDocTitle('Create new project')" routerLink="/create-project"
-            routerLinkActive="active">Add Project</a>
+          <a class="nav-link" *ngIf="authService.isLoggedIn" (click)="setDocTitle('Create new project')"
+            routerLink="/create-project" routerLinkActive="active">Add Project</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="setDocTitle('Register')" routerLink="/register"
+          <a class="nav-link" *ngIf="!authService.isLoggedIn" (click)="setDocTitle('Register')" routerLink="/register"
             routerLinkActive="active">Signup</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="setDocTitle('Login')" routerLink="/login" routerLinkActive="active">Login</a>
+          <a class="nav-link" *ngIf="!authService.isLoggedIn" (click)="setDocTitle('Login')" routerLink="/login"
+            routerLinkActive="active">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="authService.isLoggedIn" (click)="logout()" routerLinkActive="active">Logout</a>
         </li>
       </ul>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class ListComponent implements OnInit {
 
   public projectList = [];
 
-  constructor(private projectService: ProjectService, private route: Router) {
+  constructor(private projectService: ProjectService, private route: Router, public authService: AuthService) {
 
   }
 
@@ -38,6 +39,10 @@ export class ListComponent implements OnInit {
 
   readProject(project) {
     this.route.navigate(['/project/read/', project._id])
+  }
+
+  isSameUser(project) {
+    return this.authService.user._id == project.author._id
   }
 
 }

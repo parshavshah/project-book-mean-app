@@ -8,23 +8,42 @@
             </div>
             <div class="card-body">
                 <p class="card-text">{{project.body}}</p>
-                <button class="btn btn-dark btn-sm" (click)="addProjectLike()">Like this project</button>
+
             </div>
         </div>
     </div>
 
     <div *ngIf="project" class="col-6 offset-3">
-        <h3>Comments <span class="float-right text-dark">Likes : {{project.likes.length}}</span> </h3>
+        <button *ngIf="!isLikedProject()" class="btn btn-dark btn-sm" (click)="addProjectLike()">Add <i
+                class=" text-light bi bi-heart-fill"></i></button>
+        <button *ngIf="isLikedProject()" class="btn btn-danger btn-sm" (click)="removeProjectLike()">Remove
+            <i class=" text-light bi bi-heart-fill"></i></button>
+        <hr>
+        <h3>Comments
+            <span class="float-right text-dark">
+                <i class=" text-danger bi bi-heart-fill"></i> :
+                {{project.likes.length}}
+            </span>
+        </h3>
         <div class="card border-default mb-3 comment" *ngFor="let comment of project.comments">
-            <div class="card-header">{{comment.userId.firstName}} {{comment.userId.lastName}} <small>{{comment.date|
-                    dateAgo}}</small></div>
+            <div class="card-header">
+                <span *ngIf="isSameUser(comment)">You</span>
+                <span *ngIf="!isSameUser(comment)">{{comment.userId.firstName}} {{comment.userId.lastName}}</span>
+                <small> commented {{comment.date| dateAgo}}</small>
+            </div>
             <div class="card-body">
-                <p class="card-text">{{comment.body}}
-                    <small><a (click)="editComment(comment, commentElement)">edit</a></small>
+                <p class="card-text">{{comment.body}} &nbsp;&nbsp;
+                    <a class="text-danger" *ngIf="isSameUser(comment)" (click)="editComment(comment, commentElement)">
+                        <i title="Edit Comment" class="bi bi-pencil"></i>
+                    </a>
                 </p>
             </div>
         </div>
-        <h3><span *ngIf="commentEdit">Edit</span><span *ngIf="!commentEdit">Add</span> Comment</h3>
+        <h3>
+            <span *ngIf="commentEdit">Edit</span>
+            <span *ngIf="!commentEdit">Add</span>
+            Comment
+        </h3>
         <app-manage-comment id="commentEl" (commentAddedEvent)="addComment($event)" [projectId]="project._id">
         </app-manage-comment>
     </div>

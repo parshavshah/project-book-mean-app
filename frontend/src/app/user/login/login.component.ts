@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Title } from "@angular/platform-browser";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: Router,
     private userService: UserService,
-    private router: ActivatedRoute) { }
+    private router: ActivatedRoute,
+    private authSerivce: AuthService) { }
 
   ngOnInit(): void {
     this.router.queryParams.subscribe(params => {
@@ -44,6 +46,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('authToken', data.data);
         if (data.status == 200) {
           setTimeout(() => {
+            this.authSerivce.isAuthenticated()
             this.route.navigate(['/projects'])
           }, 1000)
         }
