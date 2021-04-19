@@ -6,6 +6,7 @@ import { ReadComponent } from './project/read/read.component';
 import { UpdateComponent } from './project/update/update.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { LoginComponent } from './user/login/login.component';
+import { ProfileComponent } from './user/profile/profile.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { VerifyComponent } from './user/verify/verify.component';
 
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'verify',
     component: VerifyComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'projects',

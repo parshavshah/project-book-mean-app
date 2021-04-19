@@ -13,6 +13,10 @@ export class ProjectService {
     return this.chttp.get('project')
   }
 
+  getMyProjects(){
+    return this.chttp.get('project/my')
+  }
+
   getProjectById(id) {
     return this.chttp.get(`project/${id}`)
   }

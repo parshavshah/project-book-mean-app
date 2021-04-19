@@ -22,5 +22,8 @@ export class UserService {
     return this.chttp.post('user/verify', data)
   }
 
+  getMyProfile(id) {
+    return this.chttp.get(`user/profile/${id}`)
+  }
 
 }

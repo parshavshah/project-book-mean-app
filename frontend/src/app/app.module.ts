@@ -17,6 +17,7 @@ import { ManageCommentComponent } from './project/manage-comment/manage-comment.
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ProfileComponent } from './user/profile/profile.component';
 
 export function tokenGetter() {
   return localStorage.getItem("authToken");
@@ -41,6 +42,7 @@ const JWT_Module_Options: JwtModuleOptions = {
     ListComponent,
     ManageCommentComponent,
     DateAgoPipe,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-info">
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand">Project Book</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -15,6 +15,11 @@
           <a class="nav-link" *ngIf="authService.isLoggedIn" (click)="setDocTitle('Create new project')"
             routerLink="/create-project" routerLinkActive="active">Add Project</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="authService.isLoggedIn" (click)="setDocTitle('My Profile')"
+            routerLink="/profile" routerLinkActive="active">My Profile</a>
+        </li>
+        
         <li class="nav-item">
           <a class="nav-link" *ngIf="!authService.isLoggedIn" (click)="setDocTitle('Register')" routerLink="/register"
             routerLinkActive="active">Signup</a>
