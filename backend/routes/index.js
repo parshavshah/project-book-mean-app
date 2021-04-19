@@ -21,6 +21,11 @@ router.post('/user/register',
   validators.userSignup,
   controllers.userController.registerUser);
 
+router.get('/user/profile/:id',
+  authUser,
+  controllers.userController.getUserProfile
+)
+
 
 // --- project
 router.post('/project',

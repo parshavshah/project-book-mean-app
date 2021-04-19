@@ -171,3 +171,44 @@ exports.verifyUser = async (req, res) => {
         response.response(res);
     }
 }
+
+
+
+/**
+ * @name : getUserProfile
+ * @description : to get user profile
+ */
+exports.getUserProfile = async (req, res) => {
+    try {
+
+        let userId = req.params.id;
+
+        let dbResponse = await userModel.findOne({
+            _id: userId
+        }, {
+            password: 0,
+            __v: 0,
+            verificationCode: 0,
+            role: 0,
+            status: 0
+        })
+
+        if (dbResponse) {
+
+            res['data'] = dbResponse;
+            res['message'] = "User profile";
+            res['code'] = 200
+
+            response.response(res)
+
+        } else {
+            throw new Error("User not found")
+        }
+
+    } catch (error) {
+        res['message'] = error.message;
+        res['data'] = error;
+        res['code'] = 500;
+        response.response(res);
+    }
+}
